@@ -1,0 +1,92 @@
+
+# EXAMPLES
+http://127.0.0.1:8000/api/bloodtests/test/CHO
+
+
+curl -i --location --request POST 'http://127.0.0.1:8000/api/bloodtests/test/CHO' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "code": "CHO1",
+    "name": "ddddd",
+    "unit": "g/M",
+    "upper": 60,
+    "lower": 40
+}'
+
+
+curl -i --location --request POST 'http://127.0.0.1:8000/api/bloodtests/test/CHO' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "code": "CHO",
+    "name": "ddddd",
+    "unit": "g/M",
+    "lower": 40
+}'
+
+
+curl -i --location --request POST 'http://127.0.0.1:8000/api/bloodtests/test/CHO' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "code": "CHO",
+    "name": "ddddd",
+    "unit": "g/M",
+    "upper": 40
+}'
+
+
+curl -i --location --request POST 'http://127.0.0.1:8000/api/bloodtests/test/CHO' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "code": "CHO",
+    "name": "Cholesterol",
+    "unit": "g/M",
+    "upper": 19,
+    "lower": -3
+}'
+
+
+
+curl -i --location --request POST 'http://127.0.0.1:8000/api/bloodtests/test/CHO' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "code": "CHO",
+    "name": "Cholesterol",
+    "unit": "g/M",
+    "upper": null,
+    "lower": null
+}'
+
+
+curl -i --location --request POST 'http://127.0.0.1:8000/api/bloodtests/test/CHO' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "code": "CHO",
+    "name": "Cholesterol",
+    "unit": "g/M"
+}'
+
+
+
+curl -i --location --request POST 'http://127.0.0.1:8000/api/bloodtests/test/CHO' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "code": "CHO",
+    "name": "Cholesterol",
+    "unit": "g/M",
+    "upper": 55,
+    "lower": 53
+}'
+
+
+curl -i --location --request POST 'http://127.0.0.1:8000/api/bloodtests/test/CHO' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "code": "CHO",
+    "name": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "unit": "g/M",
+    "upper": 50,
+    "lower": 500
+}'
+
+
+list(TestResult.objects.all())

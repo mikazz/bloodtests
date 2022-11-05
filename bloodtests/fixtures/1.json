@@ -1,0 +1,14 @@
+[
+  {
+    "model": "bloodtests.TestResult",
+    "pk": 1,
+    "fields":
+    {
+      "code": "CHO",
+      "name": "Cholesterol",
+      "unit": "g/M",
+      "upper": 99,
+      "lower": 70
+    }
+  }
+]

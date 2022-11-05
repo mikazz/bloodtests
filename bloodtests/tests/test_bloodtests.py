@@ -87,11 +87,11 @@ class TestBloodTests():
         response = request_client.get(self.apipath + 'CHO1')
         assert response.status_code == status.HTTP_200_OK
 
-    @pytest.mark.parametrize('test, url_code, existing, expected_result', [({'code': 'CHO', 'name': 'Cholesterol', 'unit': 'g/M', 'upper': 99, 'lower': 45}, 'CHO', {}, status.HTTP_200_OK),
-                                                                           ({'code': 'CHO', 'name': 'Cholesterol', 'unit': 'g/M', 'upper': 99, 'lower': 45}, 'CHO',
-                                                                            {'code': 'CHO', 'name': 'Cholesterol1', 'unit': 'g/L', 'upper': 98, 'lower': 55}, status.HTTP_200_OK),
-                                                                           ({'code': 'CHO', 'name': 'Cholesterol', 'unit': 'g/M', 'upper': None, 'lower': 45}, 'CHO', {}, status.HTTP_200_OK),
-                                                                           ({'code': 'CHO', 'name': 'Cholesterol', 'unit': 'g/M', 'upper': 33, 'lower': None}, 'CHO', {}, status.HTTP_200_OK),
+    @pytest.mark.parametrize('test, url_code, existing, expected_result', [
+        ({'code': 'CHO', 'name': 'Cholesterol', 'unit': 'g/M', 'upper': 99, 'lower': 45}, 'CHO', {}, status.HTTP_200_OK),
+        ({'code': 'CHO', 'name': 'Cholesterol', 'unit': 'g/M', 'upper': 99, 'lower': 45}, 'CHO', {'code': 'CHO', 'name': 'Cholesterol', 'unit': 'g/M', 'upper': 98, 'lower': 55}, status.HTTP_200_OK),
+        ({'code': 'CHO', 'name': 'Cholesterol', 'unit': 'g/M', 'upper': None, 'lower': 45}, 'CHO', {}, status.HTTP_200_OK),
+        ({'code': 'CHO', 'name': 'Cholesterol', 'unit': 'g/M', 'upper': 33, 'lower': None}, 'CHO', {}, status.HTTP_200_OK),
     ])
     def test_post_basic(self, request_client, test, url_code, existing, expected_result):
         # Create a test
@@ -104,19 +104,14 @@ class TestBloodTests():
             assert t.upper == existing['upper']
             assert t.lower == existing['lower']
 
-
         # Run the API
-        print (test)
         response = request_client.post(self.apipath + url_code, content_type='application/json', data=json.dumps(test))
-
         assert response.status_code == expected_result
-        assert len(Test.objects.all()) == 1
-        t = Test.objects.first()
-        assert t.code == test['code']
-        assert t.name == test['name']
-        assert t.unit == test['unit']
-        assert t.upper == test['upper']
-        assert t.lower == test['lower']
+        assert response.data["code"] == test["code"]
+        assert response.data["name"] == test['name']
+        assert response.data["unit"] == test['unit']
+        assert response.data["upper"] == test['upper']
+        assert response.data["lower"] == test['lower']
 
     @pytest.mark.parametrize('field', [('name'),
                                        ('unit')
@@ -147,7 +142,6 @@ class TestBloodTests():
         assert 'Ensure this field has no more than' in content[field][0]
 
     def test_post_error_lower_null_upper_null(self, request_client):
-        data = {'code': 'CHO', 'name': 'Cholesterol', 'unit': 'g/M', 'upper': 99, 'lower': 45}
         data = {'code': 'CHO', 'name': 'Cholesterol', 'unit': 'g/M'}
         response = request_client.post(self.apipath + 'CHO', content_type='application/json', data=json.dumps(data))
         assert response.status_code == status.HTTP_400_BAD_REQUEST
@@ -155,7 +149,6 @@ class TestBloodTests():
         assert 'Lower and upper cannot both be null' in content
 
     def test_post_error_lower_gt_upper(self, request_client):
-        data = {'code': 'CHO', 'name': 'Cholesterol', 'unit': 'g/M', 'upper': 99, 'lower': 45}
         data = {'code': 'CHO', 'name': 'Cholesterol', 'unit': 'g/M', 'upper': 44, 'lower': 45}
         response = request_client.post(self.apipath + 'CHO', content_type='application/json', data=json.dumps(data))
         assert response.status_code == status.HTTP_400_BAD_REQUEST
