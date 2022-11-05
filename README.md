@@ -82,15 +82,3 @@ We would like you to ...
 3. Please create a repo on a hosting service like github, bitbucket and commit and push the whole project there. Including the files we provide and the ones you create/update. Please do this as you'd normally work, committing as often as you normally would etc.
 4. Share this link with us so we can see what you've done and pull it down and run it.
 
-## Additional information
-
-Everything else you need to know to complete the task should be able to be determined from inspection of the code or the testing file.
-
-Please don't modify the test file supplied, though you may of course add your own tests into another file.
-
-As a guide we'd expect this to take around 2-4 hours, but we won't be timing it as such. If you could send a link to a completed repo within a few days that would be fine for us.
-
-You can consult whatever resources you would in a real life situation.
-
-Finally, if there's anything that isn't clear or you have questions, feel free to get in touch with me on brendan@getlivesmart.com.
-
