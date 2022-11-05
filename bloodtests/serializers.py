@@ -27,15 +27,13 @@ class TestResultSerializer(serializers.ModelSerializer):
             'lower',
             'upper'
         ]
+
     def create(self, data) -> TestResult:
         """
             validation when creation
         """
-        # if not data['code'].isalpha():
-        #     raise serializers.ValidationError("Only alphanumeric")
         upper = data.get("upper", None)
         lower = data.get("lower", None)
-
         if upper and upper < 0 or lower and lower < 0:
             raise serializers.ValidationError("Only positive numbers for 'upper' and 'lower' allowed")
         if not upper and not lower:
